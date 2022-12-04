@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
 name = "riot_process_info"
-crate-type=["cdylib"]
+crate-type=["rlib","cdylib"]
 
 [dependencies]
 sysinfo = "0.26.8"
