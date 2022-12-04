@@ -13,8 +13,8 @@ async function getLeagueApiInfo() {
           return reject('No league client process found')
   
         let apiInfo = {
-          token: '',
           port: '',
+          token: '',
         }
         let i = 0
   
@@ -30,7 +30,7 @@ async function getLeagueApiInfo() {
             ?.split('=')[1]
   
           if (token) apiInfo = { ...apiInfo, token }
-          if (port) apiInfo = { ...apiInfo, port }
+          if (port) apiInfo = { ...apiInfo, port: parseInt(port) }
   
           i++
   

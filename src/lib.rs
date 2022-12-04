@@ -30,13 +30,13 @@ pub extern "C" fn get_riot_token() ->  RiotApiInfo{
     let mut system = System::new();
     system.refresh_all();
 
-    for p in system.processes_by_name("LeagueClient.exe") {
+    for p in system.processes_by_name("LeagueClientUx") {
         for c in p.cmd(){
-            if c.contains("--riotclient-app-port"){
+            if c.contains("--app-port"){
                 riot_api_info.port= c.split("=").last().unwrap().parse::<i32>().unwrap();
 
             }
-            if c.contains("--riotclient-auth-token") {
+            if c.contains("--remoting-auth-token") {
                 let t = c.split("=").last().unwrap();
                 riot_api_info.token = to_c_str(t);
             }
