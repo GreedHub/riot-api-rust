@@ -3,6 +3,7 @@ use std::os::raw::c_char;
 use std::ffi::CString;
 use std::ffi::CStr;
 
+#[derive(Debug)]
 #[repr(C)]
 pub struct RiotApiInfo  {
     pub port: i32,
@@ -13,14 +14,14 @@ fn to_c_str(s:&str)->*mut c_char{
     CString::new(s).unwrap().into_raw()
 }
 
-fn c_str_to_str(cs:*mut c_char)->String{
+fn c_str_to_string(cs:*mut c_char)->String{
     let cstring = unsafe {CStr::from_ptr(cs)};
     cstring.to_str().unwrap().to_owned()
 }
 
 
 #[no_mangle]
-pub extern fn  get_riot_token(_n:i32) ->  RiotApiInfo{
+pub extern "C" fn get_riot_token() ->  RiotApiInfo{
     let mut riot_api_info =RiotApiInfo{
         port: 0,
         token: to_c_str(""),
@@ -37,7 +38,7 @@ pub extern fn  get_riot_token(_n:i32) ->  RiotApiInfo{
             }
             if c.contains("--riotclient-auth-token") {
                 let t = c.split("=").last().unwrap();
-                riot_api_info.token= to_c_str(t);
+                riot_api_info.token = to_c_str(t);
             }
         }
     }
