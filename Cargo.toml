@@ -1,0 +1,13 @@
+[package]
+name = "riot_process_info"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "riot_process_info"
+crate-type=["cdylib"]
+
+[dependencies]
+sysinfo = "0.26.8"
+libc = "0.2.138"
